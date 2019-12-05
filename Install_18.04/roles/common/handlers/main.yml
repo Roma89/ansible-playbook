@@ -1,0 +1,6 @@
+# file: roles/webserver/handlers/main.yml
+---
+  - name: reload snmpd
+    service: name=snmpd state=reloaded
+  - name: restart postfix
+    service: name=postfix state=restarted

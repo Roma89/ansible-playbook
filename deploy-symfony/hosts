@@ -1,0 +1,8 @@
+[webservers]
+serverweb01
+serverdemo
+
+[mysqlserver]
+serverdb01
+serverdbdemo
+localhost

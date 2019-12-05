@@ -1,0 +1,25 @@
+---
+# Parametri Prod
+# Paramentri DB Default
+db_driver: pdo_mysql
+db_host: serverdb01
+db_port: null
+db_name: database_prod
+db_user: utente_prod
+db_password: password
+
+# Altri paramentri
+mailer_transport:  smtp
+mailer_host:       127.0.0.1
+mailer_user:       ~
+mailer_password:   ~
+
+locale:            it
+secret:            KkKjHyYbhdvsbjfbfdbfdbfbvsdhartwe454HHfVYkMbGDDrYuJ
+
+debug_toolbar:          true
+debug_redirects:        false
+use_assetic_controller: true
+
+# Progetto
+sf2_project_root: /home/vhosts/progetto-prod

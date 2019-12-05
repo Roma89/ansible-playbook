@@ -1,0 +1,8 @@
+# file: roles/webserver/handlers/main.yml
+---
+  - name: reload apache2
+    service: name=apache2 state=reloaded
+  - name: restart apache2
+    service: name=apache2 state=restart
+  - name: reload xinetd
+    service: name=xinetd state=reloaded

@@ -1,0 +1,7 @@
+---
+remote_db_user: SUBSTITUTEME
+remote_db_password: SUBSTITUTEME
+local_db_name: database_test
+local_db_user: SUBSTITUTEME
+local_db_password: SUBSTITUTEME
+local_db_port: 3306

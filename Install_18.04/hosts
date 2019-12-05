@@ -1,0 +1,6 @@
+[webserver]
+serverweb01 ansible_ssh_user=root
+serverdemo ansible_ssh_user=root
+
+[mysqlserver]
+serverdb01 ansible_ssh_user=root

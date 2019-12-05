@@ -1,0 +1,9 @@
+# mysqlserver/tasks/main.yml
+---
+-   include_vars: vars/security.yml
+-   name: Remote db backup
+    mysql_db: name={{ remote_db_name }} login_user={{ remote_db_user }} login_password={{ remote_db_password }} state=dump target=/tmp/{{ remote_db_name }}.sql.bz2
+-   name: Copying remote db backup to localhost
+    fetch: src=/tmp/{{ remote_db_name }}.sql.bz2 dest=/tmp/ flat=yes validate_checksum=no
+-   name: Removing remote backup
+    file: path=/tmp/{{ remote_db_name }}.sql.bz2 state=absent

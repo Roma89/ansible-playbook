@@ -1,0 +1,4 @@
+<?php
+  $mysql_user = 'observium_mon';
+  $mysql_pass = 'password01';
+?>

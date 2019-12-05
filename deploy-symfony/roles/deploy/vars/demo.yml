@@ -1,0 +1,24 @@
+---
+# Parametri Demo
+# Paramentri DB Default
+db_driver: pdo_mysql
+db_host: serverdbdemo
+db_port: null
+db_name: database_demo
+db_user: utente_demo
+db_password: password
+
+# Altri paramentri
+mailer_transport:  smtp
+mailer_host:       127.0.0.1
+mailer_user:       ~
+mailer_password:   ~
+
+locale:            it
+secret:            KkKjHyYbhdvtyjytjthrtger4wtr4r 
+debug_toolbar:          true
+debug_redirects:        false
+use_assetic_controller: true
+
+# Progetto
+sf2_project_root: /home/vhosts/progetto-demo

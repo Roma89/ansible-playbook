@@ -1,0 +1,21 @@
+# mysqlserver/tasks/main.yml
+---
+    - name: General | Install required packages.
+      apt:
+       name:
+        - python-mysqldb
+        - mysql-server
+        - mysql-client
+        - php-mysql
+       state: present
+       
+    - name: Copy mysql agent
+      copy: src=mysql dest=/usr/lib/observium_agent/local/mysql mode="a+x"
+      
+    - name: Create permission user
+      mysql_user: user=observium_mon password=password01 priv=observium_mon.*:ALL host=localhost state=present
+      
+    - name: Copy mysql.cnf agent
+      copy: src=mysql.cnf dest=/usr/lib/observium_agent/local/mysql.cnf
+      notify:
+      - reload xinetd

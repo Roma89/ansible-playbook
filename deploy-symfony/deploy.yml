@@ -1,0 +1,15 @@
+---
+-   hosts: webservers
+    vars:
+        app_remote_env: "{{ app_remote_env }}"
+        sf2_project_env: prod
+        sf2_project_name: MyProject
+        sf2_project_repo: git@bitbucket.org:prova/MyProject.git
+        sf2_project_branch: develop
+        ansible_ssh_user: root
+
+    roles:
+        - deploy
+
+    tasks:
+        -   local_action: shell echo "Deploy effettuato con successo !"

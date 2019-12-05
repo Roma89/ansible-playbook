@@ -1,0 +1,100 @@
+# common/tasks/main.yml
+---
+    - name: General | Install required packages.
+      apt:
+       name:
+        - discus
+        - iotop
+        - htop
+        - figlet
+        - screen
+        - rsync
+        - build-essential
+        - unzip
+        - tar
+        - bzip2
+        - yui-compressor
+        - sed
+        - findutils
+        - whois
+        - curl
+        - git
+        - traceroute
+        - etckeeper
+        - ipset
+        - iptables-persistent
+        - byobu
+        - nfs-common
+        - python-apt
+       state: present
+    
+    - name: install postfix
+      apt:
+       name:
+        - postfix
+        - mailutils
+        - libsasl2-2
+        - ca-certificates
+        - libsasl2-modules
+       state: present
+      tags:
+        - install_posfix
+
+    - name: Install snmpd e xinetd
+      apt:
+       name:
+        - snmpd
+        - xinetd
+       state: present     
+      tags:
+        - install_observium
+
+    - name: Copy Distro
+      copy: src=distro dest=/usr/bin/distro mode="a+x"
+      tags:
+        - install_observium
+
+    - name: Copy snmpd.conf
+      copy: src=snmpd.conf dest=/etc/snmp/snmpd.conf
+      notify: reload snmpd
+      tags:
+        - install_observium
+
+    - name: Copy observium_agent
+      copy: src=observium_agent_xinetd dest=/etc/xinetd.d/observium_agent_xinetd mode="a+x"
+      tags:
+        - install_observium
+
+    - name: Copy observium_agent
+      copy: src=observium_agent dest=/usr/bin/observium_agent mode="a+x"
+      tags:
+        - install_observium
+
+    - name: Create directory
+      file: path=/usr/lib/observium_agent/local recurse=yes state=directory mode=0755
+      tags:
+        - install_observium
+
+    - name: Create default directory script e log
+      file: path=/usr/local/obassets/{{item}} state=directory mode=0755
+      with_items: 
+        - resources 
+        - volatile 
+        - logs 
+
+    - name: Create Script ObDiskSpace
+      copy: src=ObDiskSpace.sh dest=/usr/local/obassets/resources mode="a+x"
+      tags:
+        - check_diskspace
+        
+    - name: Insall cronjob DiskSpace
+      cron: name="CronDiskSpace"  minute="0" hour="3" job="/usr/local/obassets/resources/ObDiskSpace.sh > /dev/null 2>&1"
+      tags:
+        - check_diskspace
+        
+    - name: Set timezone to Europe/Rome
+      timezone:
+       name: Europe/Rome
+      
+    - name: Generate locale IT
+      locale_gen: name=it_IT.UTF-8 state=present

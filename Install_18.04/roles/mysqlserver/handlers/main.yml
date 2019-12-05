@@ -1,0 +1,4 @@
+# file: roles/webserver/handlers/main.yml
+---
+  - name: reload xinetd
+    service: name=xinetd state=reloaded

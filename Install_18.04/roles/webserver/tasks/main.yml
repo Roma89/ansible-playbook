@@ -1,0 +1,32 @@
+# webserver/tasks/main.yml
+---
+    - name: General | Install required packages.
+      apt:
+       name:
+        - apache2
+        - php
+        - php-mysql
+       state: present
+                 
+    - name: Copy apache agent
+      copy: src=apache dest=/usr/lib/observium_agent/local/apache mode="a+x"
+      notify:
+      - reload xinetd
+            
+    - name: Add line for ServerName Apache
+      lineinfile: dest=/etc/apache2/apache2.conf line="ServerName {{ ansible_hostname }}"
+    
+    - name: rimozione PrivateTmp apache2
+      replace:
+       path: /etc/systemd/system/multi-user.target.wants/apache2.service
+       regexp: "PrivateTmp=true"
+       replace: "PrivateTmp=false"
+
+    - name: enabled mod_rewrite
+      apache2_module: name=rewrite state=present
+
+    - name: Add line for hide Apache Version
+      lineinfile: dest=/etc/apache2/apache2.conf regexp="{{ item }}"  line="{{ item }}"
+      with_items: [ ServerSignature Off , ServerTokens Prod ]
+      notify:
+      - reload apache2

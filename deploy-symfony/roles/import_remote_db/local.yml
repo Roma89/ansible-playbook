@@ -1,0 +1,11 @@
+---
+-   hosts: localhost
+    connection: local
+    tasks:
+        -   include_vars: roles/mysqlserver/vars/security.yml
+        -   name: Create Database if not exist
+            mysql_db: name={{ local_db_name }} login_user={{ remote_db_user }} --port={{ local_db_port }} login_password={{ remote_db_password }} state=present
+        -   name: Importing remote db
+            mysql_db: name={{ local_db_name }} state=import target=/tmp/{{ remote_db_name }}.sql.bz2 
+        -   name: Removing local dump
+            file: path=/tmp/{{ remote_db_name }}.sql.bz2 state=absent
