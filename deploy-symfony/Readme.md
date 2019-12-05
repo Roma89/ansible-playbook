@@ -20,9 +20,7 @@
 ```
 ## Esecuzione del playbook
 ```
-ansible-playbook -l serverweb01 -i Resources/ansible/hosts Resources/ansible/deploy.yml -v -e 'app_remote_env=dist'
-ansible-playbook -l serverdemo -i Resources/ansible/hosts Resources/ansible/deploy.yml -v -e 'app_remote_env=demo'
-ansible-playbook -l serverdemo -i Resources/ansible/hosts Resources/ansible/deploy.yml -v -e 'app_remote_env=dev'
+ansible-playbook -l serverweb01 -i hosts deploy.yml -v -e 'app_remote_env=dist'
+ansible-playbook -l serverdemo -i hosts deploy.yml -v -e 'app_remote_env=demo'
+ansible-playbook -l serverdemo -i hosts deploy.yml -v -e 'app_remote_env=dev'
 ```
-
-
