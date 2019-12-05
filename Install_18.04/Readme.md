@@ -29,6 +29,7 @@ Esegue un ping a tutte le macchine dell'inventory hosts e controlla che le chiav
 `ansible -i hosts all -m ping`
 
 ## Esecuzione del playbook
-`ansible-playbook webserver.yml -i hosts` Configura un server in questo caso web 
-`ansible-playbook mysqlserver.yml -i hosts` Configura un server in questo caso mysql 
-
+```
+ansible-playbook webserver.yml -i hosts Configura un server in questo caso web 
+ansible-playbook mysqlserver.yml -i hosts Configura un server in questo caso mysql
+```
